@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Container, Navbar, Row, Col } from "react-bootstrap";
+import AddProduct from "./components/AddProduct";
+import ProductsList from "./components/ProductsList";
+import "./App.css";
 
 function App() {
+  const [productId, setProductId] = useState("");
+
+  const getProductIdHandler = (id) => {
+    console.log("The ID of document to be edited: ", id);
+    setProductId(id);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar bg="dark" variant="dark" className="header">
+        <Container>
+          <Navbar.Brand href="#home">ProdukDeskripsi CRUD</Navbar.Brand>
+        </Container>
+      </Navbar>
+
+      <Container style={{ width: "400px" }}>
+        <Row>
+          <Col>
+            <AddProduct id={productId} setProductId={setProductId} />
+          </Col>
+        </Row>
+      </Container>
+      <Container>
+        <Row>
+          <Col>
+            <ProductsList getProductId={getProductIdHandler} />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
